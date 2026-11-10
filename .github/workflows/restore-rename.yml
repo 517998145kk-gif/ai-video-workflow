@@ -1,0 +1,23 @@
+name: Restore and rename new version to index.html
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  restore-rename:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore new file and replace index.html
+        run: |
+          git config user.name "517998145kk-gif"
+          git config user.email "517998145kk@gmail.com"
+          git checkout 180e758 -- ai-shi-pin-gong-zuo-liu-kong-jian-gong-kai-ban.html
+          git rm -q index.html
+          git mv ai-shi-pin-gong-zuo-liu-kong-jian-gong-kai-ban.html index.html
+          git status --short
+          ls -l index.html
+          git commit -m "Hide external library source websites"
+          git push
